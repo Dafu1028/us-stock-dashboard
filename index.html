@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>米国株 財務分析ダッシュボード</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans',sans-serif;background:#f0f2f5;color:#333;line-height:1.6}
+.container{max-width:1280px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#0d1b2a,#1b2838,#2d4059);color:#fff;padding:40px 30px;border-radius:16px;margin-bottom:24px}
+.header h1{font-size:32px;margin-bottom:8px;letter-spacing:-0.5px}
+.header .sub{opacity:.7;font-size:14px}
+.nav{background:#fff;padding:12px 20px;border-radius:10px;margin-bottom:24px;display:flex;gap:12px;flex-wrap:wrap;
+      box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.nav a{text-decoration:none;color:#1a237e;font-weight:600;padding:6px 16px;border-radius:20px;border:1px solid #e0e0e0;
+        font-size:13px;transition:all .2s}
+.nav a:hover{background:#1a237e;color:#fff}
+.stock-card{background:#fff;border-radius:14px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.card-header h2{font-size:24px;color:#1a237e}
+.company-name{font-size:15px;color:#555;margin-top:2px}
+.sector{font-size:12px;color:#999;margin-top:4px}
+.valuation-badge{display:flex;gap:8px;flex-wrap:wrap}
+.valuation-badge span{background:#f5f5f5;padding:4px 12px;border-radius:16px;font-size:12px;color:#555;font-weight:500}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+.kpi{background:#fafafa;padding:14px;border-radius:10px;text-align:center}
+.kpi-label{display:block;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:4px}
+.kpi-value{display:block;font-size:22px;font-weight:700;color:#1a237e}
+.charts-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+.charts-row img{width:100%;border-radius:8px;border:1px solid #eee}
+.section{background:#fff;border-radius:14px;padding:28px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.section-title{font-size:20px;color:#1a237e;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e8eaf6}
+.comparison-charts{display:grid;gap:16px}
+.comparison-charts img{width:100%;border-radius:8px;border:1px solid #eee}
+.footer{text-align:center;padding:24px;color:#999;font-size:12px}
+</style></head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>米国株 財務分析ダッシュボード</h1>
+        <div class="sub">Financial Analysis Dashboard for US Stocks | 2026年03月09日 更新 | Data: Yahoo Finance</div>
+    </div>
+    <div class="nav"><a href="#AAPL">AAPL</a> <a href="#MSFT">MSFT</a> <a href="#GOOGL">GOOGL</a> <a href="#AMZN">AMZN</a> <a href="#META">META</a> <a href="#NVDA">NVDA</a> <a href="#TSLA">TSLA</a> <a href="#BRK-B">BRK-B</a> <a href="#JPM">JPM</a> <a href="#V">V</a> <a href="#comparison">比較</a></div>
+    
+        <div class="stock-card" id="AAPL">
+            <div class="card-header">
+                <div>
+                    <h2>AAPL</h2>
+                    <div class="company-name">Apple Inc.</div>
+                    <div class="sector">Technology | 時価総額 $3.78T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 32.6x</span>
+                    <span>PBR 42.9x</span>
+                    <span>EV/EBITDA 26.3x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">151.9%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">82.3%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">32.0%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">26.9%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">23.7%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">1.3x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">6.4%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">13.8%</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="AAPL_revenue_profit.png" alt="Revenue">
+                <img src="AAPL_profitability.png" alt="Profitability">
+                <img src="AAPL_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="MSFT">
+            <div class="card-header">
+                <div>
+                    <h2>MSFT</h2>
+                    <div class="company-name">Microsoft Corporation</div>
+                    <div class="sector">Technology | 時価総額 $3.04T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 25.6x</span>
+                    <span>PBR 7.8x</span>
+                    <span>EV/EBITDA 19.2x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">29.6%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">28.3%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">45.6%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">36.1%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">25.4%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.2x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">14.9%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">23.6%</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="MSFT_revenue_profit.png" alt="Revenue">
+                <img src="MSFT_profitability.png" alt="Profitability">
+                <img src="MSFT_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="GOOGL">
+            <div class="card-header">
+                <div>
+                    <h2>GOOGL</h2>
+                    <div class="company-name">Alphabet Inc.</div>
+                    <div class="sector">Communication Services | 時価総額 $3.61T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 27.6x</span>
+                    <span>PBR 8.7x</span>
+                    <span>EV/EBITDA 19.6x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">31.8%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">24.2%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">32.0%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">32.8%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">18.2%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.1x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">15.1%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">7.6%</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="GOOGL_revenue_profit.png" alt="Revenue">
+                <img src="GOOGL_profitability.png" alt="Profitability">
+                <img src="GOOGL_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="AMZN">
+            <div class="card-header">
+                <div>
+                    <h2>AMZN</h2>
+                    <div class="company-name">Amazon.com, Inc.</div>
+                    <div class="sector">Consumer Cyclical | 時価総額 $2.29T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 29.8x</span>
+                    <span>PBR 5.6x</span>
+                    <span>EV/EBITDA 14.2x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">18.9%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">13.5%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">11.2%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">10.8%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">1.1%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.4x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">12.4%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">—</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="AMZN_revenue_profit.png" alt="Revenue">
+                <img src="AMZN_profitability.png" alt="Profitability">
+                <img src="AMZN_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="META">
+            <div class="card-header">
+                <div>
+                    <h2>META</h2>
+                    <div class="company-name">Meta Platforms, Inc.</div>
+                    <div class="sector">Communication Services | 時価総額 $1.63T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 27.5x</span>
+                    <span>PBR 7.5x</span>
+                    <span>EV/EBITDA 15.5x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">27.8%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">22.1%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">41.4%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">30.1%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">22.9%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.4x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">22.2%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">8.8%</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="META_revenue_profit.png" alt="Revenue">
+                <img src="META_profitability.png" alt="Profitability">
+                <img src="META_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="NVDA">
+            <div class="card-header">
+                <div>
+                    <h2>NVDA</h2>
+                    <div class="company-name">NVIDIA Corporation</div>
+                    <div class="sector">Technology | 時価総額 $4.32T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 36.2x</span>
+                    <span>PBR 27.5x</span>
+                    <span>EV/EBITDA 29.5x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">76.3%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">70.2%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">60.4%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">55.6%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">44.8%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.1x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">65.5%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">0.8%</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="NVDA_revenue_profit.png" alt="Revenue">
+                <img src="NVDA_profitability.png" alt="Profitability">
+                <img src="NVDA_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="TSLA">
+            <div class="card-header">
+                <div>
+                    <h2>TSLA</h2>
+                    <div class="company-name">Tesla, Inc.</div>
+                    <div class="sector">Consumer Cyclical | 時価総額 $1.49T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 370.8x</span>
+                    <span>PBR 18.1x</span>
+                    <span>EV/EBITDA 124.1x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">4.6%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">4.4%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">5.1%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">4.0%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">6.6%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.2x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">-2.9%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">—</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="TSLA_revenue_profit.png" alt="Revenue">
+                <img src="TSLA_profitability.png" alt="Profitability">
+                <img src="TSLA_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="BRK-B">
+            <div class="card-header">
+                <div>
+                    <h2>BRK-B</h2>
+                    <div class="company-name">Berkshire Hathaway Inc.</div>
+                    <div class="sector">Financial Services | 時価総額 $1.08T</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 16.1x</span>
+                    <span>PBR 0.0x</span>
+                    <span>EV/EBITDA —</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">9.3%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">—</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">—</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">16.3%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">6.1%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.2x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">-3.2%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">—</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="BRK-B_revenue_profit.png" alt="Revenue">
+                <img src="BRK-B_profitability.png" alt="Profitability">
+                <img src="BRK-B_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="JPM">
+            <div class="card-header">
+                <div>
+                    <h2>JPM</h2>
+                    <div class="company-name">JPMorgan Chase & Co.</div>
+                    <div class="sector">Financial Services | 時価総額 $780.7B</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 14.5x</span>
+                    <span>PBR 2.3x</span>
+                    <span>EV/EBITDA —</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">15.7%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">—</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">—</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">31.4%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">-81.3%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">1.4x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">7.3%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">—</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="JPM_revenue_profit.png" alt="Revenue">
+                <img src="JPM_profitability.png" alt="Profitability">
+                <img src="JPM_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+        <div class="stock-card" id="V">
+            <div class="card-header">
+                <div>
+                    <h2>V</h2>
+                    <div class="company-name">Visa Inc.</div>
+                    <div class="sector">Financial Services | 時価総額 $611.9B</div>
+                </div>
+                <div class="valuation-badge">
+                    <span>PER 29.8x</span>
+                    <span>PBR 15.8x</span>
+                    <span>EV/EBITDA 23.5x</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi"><span class="kpi-label">ROE</span><span class="kpi-value">52.9%</span></div>
+                <div class="kpi"><span class="kpi-label">ROIC</span><span class="kpi-value">47.9%</span></div>
+                <div class="kpi"><span class="kpi-label">営業利益率</span><span class="kpi-value">66.4%</span></div>
+                <div class="kpi"><span class="kpi-label">純利益率</span><span class="kpi-value">50.1%</span></div>
+                <div class="kpi"><span class="kpi-label">FCFマージン</span><span class="kpi-value">53.9%</span></div>
+                <div class="kpi"><span class="kpi-label">D/Eレシオ</span><span class="kpi-value">0.7x</span></div>
+                <div class="kpi"><span class="kpi-label">売上成長率</span><span class="kpi-value">11.3%</span></div>
+                <div class="kpi"><span class="kpi-label">配当性向</span><span class="kpi-value">—</span></div>
+            </div>
+            <div class="charts-row">
+                <img src="V_revenue_profit.png" alt="Revenue">
+                <img src="V_profitability.png" alt="Profitability">
+                <img src="V_cashflow.png" alt="Cash Flow">
+            </div>
+        </div>
+    
+        <div class="section" id="comparison">
+            <h2 class="section-title">銘柄間比較</h2>
+            <div class="comparison-charts">
+                <img src="comparison_profitability.png" alt="収益性比較">
+                <img src="comparison_valuation.png" alt="バリュエーション比較">
+                <img src="comparison_growth.png" alt="成長率比較">
+            </div>
+        </div>
+    <div class="footer">
+        米国株財務分析ダッシュボード | Powered by yfinance + Python | 2026-03-09 12:33<br>
+        ※ 本データは情報提供のみを目的としており、投資助言ではありません。
+    </div>
+</div>
+</body></html>
